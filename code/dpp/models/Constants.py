@@ -1,0 +1,3 @@
+PAD = 0
+GRID = -1
+GRID_LENGTH = 2

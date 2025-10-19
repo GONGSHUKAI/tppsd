@@ -1,0 +1,33 @@
+cuda_device: '7'
+dataset_name: synth/multi_hawkes_(0.5, 0.5)_([1, 0.5], [0.1, 1])_([2, 2], [2, 2])_100
+draft_model:
+  context_size: 64
+  num_mix_components: 64
+  transformer:
+    dropout: 0.1
+    nhead: 4
+    num_layers: 6
+model_save_path: checkpoint/sahp
+model_type: sahp
+plotting:
+  output_dir: plots/sahp
+sampling:
+  batch_size: 1
+  gamma: 10
+  init_batch: true
+  max_events: 1000
+  model_paths:
+    draft: checkpoint/sahp/LogNormMixTransformer_multi_hawkes_(0.5, 0.5)_([1, 0.5],
+      [0.1, 1])_([2, 2], [2, 2])_100_4_heads_6_layers.pth
+    target: checkpoint/sahp/LogNormMixTransformer_multi_hawkes_(0.5, 0.5)_([1, 0.5],
+      [0.1, 1])_([2, 2], [2, 2])_100_8_heads_20_layers.pth
+  t_end: 100
+  type: multi-hawkes
+seed: 11
+target_model:
+  context_size: 64
+  num_mix_components: 64
+  transformer:
+    dropout: 0.1
+    nhead: 8
+    num_layers: 20

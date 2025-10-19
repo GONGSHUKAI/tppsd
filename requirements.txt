@@ -1,0 +1,6 @@
+torch==2.5.1
+numpy
+matplotlib
+scipy
+PyYAML
+statsmodels

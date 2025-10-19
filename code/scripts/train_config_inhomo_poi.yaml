@@ -1,0 +1,28 @@
+# General configuration
+seed: 0
+dataset_name: 'synth/inhomogeneous_poisson_10'
+model_save_path: 'checkpoint/sahp'
+model_type: 'sahp'
+cuda_device: '6'
+
+# Model configuration
+model:
+  context_size: 64                 
+  num_mix_components: 64           
+  transformer:
+    nhead: 8
+    num_layers: 20
+    dropout: 0.1
+
+# Training configuration
+training:
+  batch_size: 16
+  regularization: 1.0e-5
+  learning_rate: 1.0e-3
+  max_epochs: 1000
+  display_step: 1
+  patience: 50
+
+# Plotting configuration
+plotting:
+  output_dir: 'plots'

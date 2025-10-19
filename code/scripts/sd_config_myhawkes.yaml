@@ -1,0 +1,31 @@
+cuda_device: '7'
+dataset_name: synth/hawkes_2.5_1.0_2.0_100.0
+draft_model:
+  context_size: 64
+  num_mix_components: 64
+  transformer:
+    dropout: 0.1
+    nhead: 1
+    num_layers: 1
+model_save_path: checkpoint/attnhp
+model_type: attnhp
+plotting:
+  output_dir: plots/attnhp
+sampling:
+  batch_size: 1
+  gamma: 60
+  init_batch: false
+  max_events: 1000
+  model_paths:
+    draft: checkpoint/attnhp/LogNormMixTransformer_hawkes_2.5_1.0_2.0_100.0_1_heads_1_layers.pth
+    target: checkpoint/attnhp/LogNormMixTransformer_hawkes_2.5_1.0_2.0_100.0_8_heads_20_layers.pth
+  t_end: 100
+  type: hawkes
+seed: 42
+target_model:
+  context_size: 64
+  num_mix_components: 64
+  transformer:
+    dropout: 0.1
+    nhead: 8
+    num_layers: 20

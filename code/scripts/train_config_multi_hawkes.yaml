@@ -1,0 +1,28 @@
+# General configuration
+seed: 0
+dataset_name: 'synth/multi_hawkes_(0.5, 0.5)_([1, 0.5], [0.1, 1])_([2, 2], [2, 2])_100'
+model_save_path: 'checkpoint/attnhp'
+model_type: 'attnhp'
+cuda_device: '0'
+
+# Model configuration
+model:
+  context_size: 64                 
+  num_mix_components: 64           
+  transformer:
+    nhead: 2
+    num_layers: 4
+    dropout: 0.1
+
+# Training configuration
+training:
+  batch_size: 32        
+  regularization: 1.0e-5      
+  learning_rate: 1.0e-3       
+  max_epochs: 1000            
+  display_step: 1             
+  patience: 50                
+
+# Plotting configuration
+plotting:
+  output_dir: 'plots'
