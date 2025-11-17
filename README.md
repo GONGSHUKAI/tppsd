@@ -4,7 +4,8 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 
 A PyTorch implementation of the paper **"TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding"**.
-🔥 News
+
+## 🔥 News
 2025/10 💥 TPP-SD is accepted by NeurIPS 2025！！🎉🎉
 
 ## 📋 Table of Contents
