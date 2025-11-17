@@ -1,39 +1,161 @@
 # TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding
 
-Pytorch implementation of the paper "TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding".
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 
-## Environment Configuration
+A PyTorch implementation of the paper **"TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding"**.
+🔥 News
+2025/10 💥 TPP-SD is accepted by NeurIPS 2025！！🎉🎉
 
-In order to run the code, you need to run
+## 📋 Table of Contents
+
+- [TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding](#tpp-sd-accelerating-transformer-point-process-sampling-with-speculative-decoding)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🎯 Overview](#-overview)
+  - [✨ Features](#-features)
+  - [🛠️ Installation](#️-installation)
+    - [Prerequisites](#prerequisites)
+    - [Environment Setup](#environment-setup)
+  - [🚀 Usage](#-usage)
+    - [Dataset Generation](#dataset-generation)
+    - [Model Training](#model-training)
+    - [Speculative Decoding](#speculative-decoding)
+  - [📊 Results](#-results)
+  - [🏗️ Project Structure](#️-project-structure)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [📚 Citation](#-citation)
+
+## 🎯 Overview
+
+TPP-SD introduces an innovative approach to accelerate sampling in Transformer-based Point Process models using speculative decoding techniques. This implementation provides efficient sampling for various temporal point process models while maintaining high accuracy.
+
+![Architecture Overview](image/read/overall.png)
+
+## ✨ Features
+
+- 🚀 **Accelerated Sampling**: Speculative decoding for faster point process sampling
+- 🔬 **Multiple Process Types**: Support for Poisson, Uni-variate Hawkes, and Multi-variate Hawkes processes
+- 🏗️ **Flexible Architecture**: Multiple encoder options (THP, SAHP, AttNHP)
+- 📊 **Comprehensive Evaluation**: Likelihood comparison, KS plots, and sampling analysis
+- 🔧 **Configurable Training**: YAML-based configuration system
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- Python 3.9+
+- Conda (recommended)
+
+### Environment Setup
+
+Create and activate a new conda environment:
+
 ```bash
+# Create environment
 conda create -n tpp-sd python=3.9
+
+# Activate environment
+conda activate tpp-sd
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-## Running the Code
-### Synthetic Dataset Generation
-For synthetic data generation, you can first modify the parameters in `code/generate_dataset.py` and then run the following command to generate the dataset:
+## 🚀 Usage
+
+### Dataset Generation
+
+Generate synthetic datasets for different point process types:
+
 ```bash
 cd code
+
+# Modify parameters in generate_dataset.py as needed
 python generate_dataset.py
 ```
-We support the generation of Poisson process, Uni-variate Hawkes process and Multi-variate Hawkes process. The generated dataset will be saved in the `data/synth` folder by default.
 
-### Training
-For training the model, run
+**Supported Process Types:**
+- **Poisson Process**: Homogeneous and inhomogeneous variants
+- **Uni-variate Hawkes Process**: Self-exciting point processes
+- **Multi-variate Hawkes Process**: Multi-dimensional temporal processes
+
+Generated datasets are saved to `data/synth/` by default.
+
+### Model Training
+
+Train transformer-based point process models:
+
 ```bash
 cd code
-python train.py --config scripts/train_config_{dataset}.yaml
+
+# Train on different datasets
+python train.py --config scripts/train_config_inhomo_poi.yaml    # Poisson process
+python train.py --config scripts/train_config_myhawkes.yaml     # Uni-variate Hawkes
+python train.py --config scripts/train_config_multi_hawkes.yaml # Multi-variate Hawkes
 ```
-where `{dataset}` can be `inhomo_poi`(Poisson process), `myhawkes`(Uni-variate Hawkes process) or `multi_hawkes`(Multi-variate Hawkes process). 
 
-You can also modify the training scripts in `code/scripts` folder to customize the training process, including the choice of encoder type (THP, SAHP, AttNHP) and model hyperparameters (Mixture components of Log-normal, etc.).
+**Customizable Options:**
+- Encoder types: THP, SAHP, AttNHP
+- Model hyperparameters
+- Mixture components (Log-normal distribution)
+- Training configurations via YAML files
 
-### TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding
+### Speculative Decoding
 
-To run the accelerated sampling with speculative decoding, you can run the following command:
+Run accelerated sampling with TPP-SD:
+
 ```bash
 cd code
-python sd_sampling_exp.py --config scripts/sd_config_{dataset}.yaml
+
+# Run speculative decoding experiments
+python sd_sampling_exp.py --config scripts/sd_config_inhomo_poi.yaml    # Poisson process
+python sd_sampling_exp.py --config scripts/sd_config_myhawkes.yaml     # Uni-variate Hawkes
+python sd_sampling_exp.py --config scripts/sd_config_multi_hawkes.yaml # Multi-variate Hawkes
 ```
-where `{dataset}` can be `inhomo_poi`(Poisson process), `myhawkes`(Uni-variate Hawkes process) or `multi_hawkes`(Multi-variate Hawkes process). The results, including the likelihood comparison plot, the Kolmogorov-Smirnov plot (KS plot) and the sampling comparison plot, will be saved in the `code/plots` folder by default.
+
+## 📊 Results
+
+The implementation generates comprehensive evaluation results:
+
+- **Likelihood Comparison Plots**: Statistical accuracy analysis
+- **Kolmogorov-Smirnov (KS) Plots**: Distribution similarity assessment
+- **Sampling Comparison Plots**: Performance and speedup visualization
+
+All results are automatically saved to `code/plots/`.
+
+## 🏗️ Project Structure
+
+```
+tppsd/
+├── code/
+│   ├── generate_dataset.py      # Synthetic data generation
+│   ├── train.py                 # Model training script
+│   ├── sd_sampling_exp.py       # Speculative decoding experiments
+│   ├── scripts/                 # Configuration files
+│   └── plots/                   # Output plots and results
+├── data/
+│   └── synth/                   # Generated synthetic datasets
+├── image/
+│   └── read/                    # Documentation images
+├── requirements.txt             # Python dependencies
+└── README.md                    # This file
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+
+
+## 📚 Citation
+
+If you use this code in your research, please cite the original paper:
+
+```bibtex
+@article{tpp-sd2024,
+  title={TPP-SD: Accelerating Transformer Point Process Sampling with Speculative Decoding},
+  author={},
+  journal={},
+  year={2024}
+}
+```
